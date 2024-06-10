@@ -2,11 +2,7 @@ namespace Journal {
   export function createJournalDoc(): void {
     const docName = DateUtil.getFormattedDate();
     const folderPath = getFolderPath();
-    const targetFolder = DocUtil.getOrCreateFolder(folderPath);
-    if (DocUtil.fileAlreadyExists(docName, targetFolder)) {
-      return;
-    }
-    DocUtil.createDoc(docName, targetFolder);
+    Util.Doc.createDoc(docName, folderPath);
   }
 
   export function getFolderPath(): string {
