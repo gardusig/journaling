@@ -46,5 +46,6 @@ module.exports = {
       },
     ],
     "prettier/prettier": "error",
+    "comma-dangle": ["error", "always-multiline"],
   },
 };
