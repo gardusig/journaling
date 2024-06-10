@@ -1,0 +1,8 @@
+{
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#9900ff", // Purple color for the status bar
+    "statusBar.noFolderBackground": "#9900ff", // Purple color when no folder is open
+    "statusBar.debuggingBackground": "#9900ff", // Purple color when debugging
+    "activityBar.background": "#9900ff" // Purple color for the activity bar
+  }
+}
