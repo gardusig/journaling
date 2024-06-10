@@ -2,7 +2,7 @@ namespace Journal {
   export function createJournalDoc(): void {
     const docName = DateUtil.getFormattedDate();
     const folderPath = getFolderPath();
-    Util.Doc.createDoc(docName, folderPath);
+    ToiletPaper.Tissuer.createRoll(docName, folderPath);
   }
 
   export function getFolderPath(): string {
