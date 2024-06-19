@@ -31,7 +31,7 @@ export namespace Cupid.DateService {
     return Utilities.formatDate(
       new Date(),
       Session.getScriptTimeZone(),
-      "yyyy-MM-dd"
+      "yyyy-MM-dd",
     );
   }
 

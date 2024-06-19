@@ -3,7 +3,7 @@
 
 # except the extensions…
 !appsscript.json
-!**/*.ts
+!src/**/*.ts
 
 # ignore even valid files if in…
 .git/**
