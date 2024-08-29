@@ -8,6 +8,13 @@ export function createWeeklyJournal(): void {
 }
 
 export function appendCurrentDateToFile(): void {
+  const folder = Journal.getCurrentFolder();
+  const fileName = Journal.getCurrentFileName();
   const currentDate = Cupid.DateService.getCurrentDateFormatted();
-  Journal.appendToCurrentFile(currentDate);
+  ToiletPaper.Tissuer.appendToFile(
+    folder,
+    fileName,
+    currentDate,
+    DocumentApp.ParagraphHeading.HEADING3
+  );
 }
