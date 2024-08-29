@@ -24,18 +24,25 @@ export namespace Journal {
   }
 
   function getCurrentFile(): GoogleAppsScript.Drive.File {
-    const currentFolder = getCurrentFolder();
-    const currentFileName = getCurrentFileName();
-    Logger.log(
-      `Trying to get current file at: ${currentFolder}/${currentFileName}`
-    );
-    const folder = DriveApp.getFoldersByName(currentFolder).next();
-    const files = folder.getFilesByName(currentFileName);
-    if (!files.hasNext()) {
+    let currentFolder = DriveApp.getRootFolder();
+    const folders = getCurrentFolder().split("/");
+    for (const nextFolder of folders) {
+      const subFoldersWithName = currentFolder.getFoldersByName(nextFolder);
+      if (!subFoldersWithName.hasNext()) {
+        throw new Error(
+          `Failed to find the next folder: ${nextFolder} within ${currentFolder.getName()}`
+        );
+      }
+      Logger.log(`Moving from ${currentFolder} to ${nextFolder}`);
+      currentFolder = subFoldersWithName.next();
+    }
+    const fileName = getCurrentFileName();
+    const filesWithName = currentFolder.getFilesByName(fileName);
+    if (!filesWithName.hasNext()) {
       throw new Error(
-        `Document ${currentFileName} not found at folder: ${currentFolder}`
+        `Document ${fileName} not found at folder: ${currentFolder.getName()}`
       );
     }
-    return files.next();
+    return filesWithName.next();
   }
 }
