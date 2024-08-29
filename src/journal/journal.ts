@@ -8,26 +8,26 @@ export namespace Journal {
     ToiletPaper.Tissuer.createRoll(`week-${weekNumber}`, folderPrefix);
   }
 
-  export function appendTodayDate() {
-    const files = getTodayJournalFiles();
-    if (files == null) {
+  export function appendTodayDate(): void {
+    const file = getTodayJournalFile();
+    if (file == null) {
       return;
     }
-    const fileId = files.next().getId();
+    const fileId = file.getId();
     const date = Cupid.DateService.getFormattedDate();
     appendToFile(fileId, date);
   }
 
-  function getTodayJournalFiles(): GoogleAppsScript.Drive.FileIterator | null {
+  function getTodayJournalFile(): GoogleAppsScript.Drive.File | null {
     const weekNumber = Cupid.DateService.getWeekNumber();
     const docName = `week-${weekNumber}`;
     const folder = DriveApp.getFoldersByName(folderPrefix).next();
     const files = folder.getFilesByName(docName);
     if (!files.hasNext()) {
-      Logger.log(`Document ${docName} not found.`);
+      Logger.log(`Document ${docName} not found at folder: ${folderPrefix}`);
       return null;
     }
-    return files;
+    return files.next();
   }
 
   function appendToFile(
