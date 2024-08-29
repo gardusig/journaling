@@ -3,42 +3,36 @@ import { Cupid } from "../cupid/dateservice";
 const folderPrefix = "documents/death-note";
 
 export namespace Journal {
-  export function createWeeklyJournal() {
+  export function getCurrentFolder(): string {
+    const currentYear = Cupid.DateService.getCurrentYear();
+    return `${folderPrefix}/${currentYear}`;
+  }
+
+  export function getCurrentFileName(): string {
     const weekNumber = Cupid.DateService.getWeekNumber();
-    ToiletPaper.Tissuer.createRoll(`week-${weekNumber}`, folderPrefix);
+    return `week-${weekNumber}`;
   }
 
-  export function appendTodayDate(): void {
-    const file = getTodayJournalFile();
-    if (file == null) {
-      return;
-    }
-    const fileId = file.getId();
-    const date = Cupid.DateService.getFormattedDate();
-    appendToFile(fileId, date);
+  export function appendToCurrentFile(date: string): void {
+    const file = getCurrentFile();
+    const doc = DocumentApp.openById(file.getId());
+    const body = doc.getBody();
+    body
+      .appendParagraph(date)
+      .setHeading(DocumentApp.ParagraphHeading.HEADING3);
+    doc.saveAndClose();
   }
 
-  function getTodayJournalFile(): GoogleAppsScript.Drive.File | null {
+  function getCurrentFile(): GoogleAppsScript.Drive.File {
     const weekNumber = Cupid.DateService.getWeekNumber();
     const docName = `week-${weekNumber}`;
     const folder = DriveApp.getFoldersByName(folderPrefix).next();
     const files = folder.getFilesByName(docName);
     if (!files.hasNext()) {
-      Logger.log(`Document ${docName} not found at folder: ${folderPrefix}`);
-      return null;
+      throw new Error(
+        `Document ${docName} not found at folder: ${folderPrefix}`
+      );
     }
     return files.next();
-  }
-
-  function appendToFile(
-    fileId: string,
-    content: string,
-    heading: GoogleAppsScript.Document.ParagraphHeading = DocumentApp
-      .ParagraphHeading.HEADING3
-  ) {
-    const doc = DocumentApp.openById(fileId);
-    const body = doc.getBody();
-    body.appendParagraph(content).setHeading(heading);
-    doc.saveAndClose();
   }
 }
