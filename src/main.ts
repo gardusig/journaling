@@ -15,6 +15,6 @@ export function appendCurrentDateToFile(): void {
     folder,
     fileName,
     currentDate,
-    DocumentApp.ParagraphHeading.HEADING3
+    DocumentApp.ParagraphHeading.HEADING3,
   );
 }
