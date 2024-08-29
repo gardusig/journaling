@@ -1,6 +1,6 @@
 import { Cupid } from "../cupid/dateservice";
 
-const folderPrefix = "documents/death-note";
+const folderPrefix = "death-note";
 
 export namespace Journal {
   export function getCurrentFolder(): string {
