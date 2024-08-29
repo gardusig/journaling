@@ -9,7 +9,9 @@ export namespace Cupid.DateService {
     SATURDAY = 6,
   }
 
-  export function getWeekNumber(baseDay: DayOfWeek = DayOfWeek.MONDAY): number {
+  export function getCurrentWeekNumber(
+    baseDay: DayOfWeek = DayOfWeek.MONDAY,
+  ): number {
     const daysSinceFirstBaseDay: number = getDaysSinceFirstBaseDay(baseDay);
     return Math.floor(daysSinceFirstBaseDay / 7) + 1;
   }
@@ -18,7 +20,7 @@ export namespace Cupid.DateService {
     return Utilities.formatDate(
       new Date(),
       Session.getScriptTimeZone(),
-      "yyyy-MM-dd"
+      "yyyy-MM-dd",
     );
   }
 
@@ -26,7 +28,7 @@ export namespace Cupid.DateService {
     return Utilities.formatDate(
       new Date(),
       Session.getScriptTimeZone(),
-      "yyyy"
+      "yyyy",
     );
   }
 

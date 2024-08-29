@@ -9,7 +9,7 @@ export namespace Journal {
   }
 
   export function getCurrentFileName(): string {
-    const weekNumber = Cupid.DateService.getWeekNumber();
+    const weekNumber = Cupid.DateService.getCurrentWeekNumber();
     return `week-${weekNumber}`;
   }
 
@@ -24,13 +24,16 @@ export namespace Journal {
   }
 
   function getCurrentFile(): GoogleAppsScript.Drive.File {
-    const weekNumber = Cupid.DateService.getWeekNumber();
-    const docName = `week-${weekNumber}`;
-    const folder = DriveApp.getFoldersByName(folderPrefix).next();
-    const files = folder.getFilesByName(docName);
+    const currentFolder = getCurrentFolder();
+    const currentFileName = getCurrentFileName();
+    Logger.log(
+      `Trying to get current file at: ${currentFolder}/${currentFileName}`
+    );
+    const folder = DriveApp.getFoldersByName(currentFolder).next();
+    const files = folder.getFilesByName(currentFileName);
     if (!files.hasNext()) {
       throw new Error(
-        `Document ${docName} not found at folder: ${folderPrefix}`
+        `Document ${currentFileName} not found at folder: ${currentFolder}`
       );
     }
     return files.next();
