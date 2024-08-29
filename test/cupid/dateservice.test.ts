@@ -22,7 +22,7 @@ function weekNumberTestSuiteGenerator(): TestRunner.TestSuite {
     }
   }
   return {
-    testName: "getWeekNumber",
+    testName: "getCurrentWeekNumber",
     testCases: testCases,
   };
 }
@@ -52,7 +52,7 @@ function createWeekNumberTestCase(
     mockSettings: { todayDate: mockedDate },
     testCaseName: `should produce week number '${expectedWeekNumber}' given date '${mockedDate}'`,
     testFunction: () => {
-      const result = Cupid.DateService.getWeekNumber();
+      const result = Cupid.DateService.getCurrentWeekNumber();
       expect(result).toBe(expectedWeekNumber);
     },
   };
@@ -66,7 +66,7 @@ function createFormattedDateTestCase(
     mockSettings: { todayDate: mockedDate },
     testCaseName: `should produce formatted date '${expectedFormattedDate}' given date '${mockedDate}'`,
     testFunction: () => {
-      const formattedDate = Cupid.DateService.getFormattedDate();
+      const formattedDate = Cupid.DateService.getCurrentDateFormatted();
       expect(formattedDate).toBe(expectedFormattedDate);
     },
   };
