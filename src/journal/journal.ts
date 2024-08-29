@@ -30,7 +30,7 @@ export namespace Journal {
       const subFoldersWithName = currentFolder.getFoldersByName(nextFolder);
       if (!subFoldersWithName.hasNext()) {
         throw new Error(
-          `Failed to find the next folder: ${nextFolder} within ${currentFolder.getName()}`
+          `Failed to find the next folder: ${nextFolder} within ${currentFolder.getName()}`,
         );
       }
       Logger.log(`Moving from ${currentFolder} to ${nextFolder}`);
@@ -40,7 +40,7 @@ export namespace Journal {
     const filesWithName = currentFolder.getFilesByName(fileName);
     if (!filesWithName.hasNext()) {
       throw new Error(
-        `Document ${fileName} not found at folder: ${currentFolder.getName()}`
+        `Document ${fileName} not found at folder: ${currentFolder.getName()}`,
       );
     }
     return filesWithName.next();
