@@ -15,20 +15,8 @@ This project is a Google Apps Script designed to automate the creation of journa
    - In the Google Apps Script editor, go to `Resources` > `Libraries`.
    - Add the `ToiletPaper` library using its Script ID.
 
-## Usage
+## Functions
 
-The main function to run is `main()`. This function will create a new journaling document in the appropriate weekly folder.
+- **createWeeklyJournal()**: Creates a new journaling document in the weekly folder.
+- **appendCurrentDateToFile()**: Appends the current date to the existing journaling document as a heading.
 
-### Functions
-
-- **main()**: Entry point of the script. Calls `Journal.createJournalDoc()` to create a new journaling document.
-- **Journal.createJournalDoc()**: Creates a new journaling document named with the current date and stores it in the appropriate weekly folder.
-
-## Example
-
-```javascript
-// To create a new journaling document, simply run the main function:
-function main() {
-  Journal.createJournalDoc();
-}
-```
