@@ -11,7 +11,7 @@ export function appendCurrentDateToFile(): void {
   const folder = Journal.getCurrentFolder();
   const fileName = Journal.getCurrentFileName();
   const currentDate = Cupid.DateService.getCurrentDateFormatted();
-  ToiletPaper.Tissuer.appendToFile(
+  ToiletPaper.Tissuer.appendParagraphToFile(
     folder,
     fileName,
     currentDate,
